@@ -1,485 +1,220 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bocatto Brunch | Veracruz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f9f8f6;
+            --accent: #1b2a8d;
+            --dark: #3b2f2f;
+            --text-light: #7a6c5d;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0 40px 0;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+        }
+
+        .hero-split {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .hero-content { flex: 1; }
+        .hero-image { flex: 1; }
+
+        @media (max-width: 1024px) {
+            .hero-split { flex-direction: column; text-align: center; gap: 40px; }
+            .hero-content { order: 2; }
+            .hero-image { order: 1; width: 100%; max-width: 500px; }
+            h1 { font-size: 2.5rem !important; }
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .logistics-box {
+            margin: 25px 0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logistics-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .hero-btns { 
+            display: flex; 
+            gap: 35px; 
+            align-items: center; 
+            margin-top: 10px; 
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background: var(--dark);
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dark);
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 4px;
+            margin-bottom: 100px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.04);
+            display: flex;
+            overflow: hidden;
+        }
+
+        .news-img-col { flex: 1.2; }
+        .news-img-col img { width: 100%; height: 100%; object-fit: cover; }
+        .news-text-col { flex: 1; padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 80px; }
+        .card { background: var(--white); padding: 12px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.03); }
+        .img-box { width: 100%; aspect-ratio: 1/1; overflow: hidden; margin-bottom: 20px; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+            .news-card { flex-direction: column; }
+        }
+
+        footer { padding: 60px 0; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+        .brand-name { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="es"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Bocatto Brunch | Veracruz&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&amp;display=swap');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--bg: #f9f8f6;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--accent: #1b2a8d;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--dark: #3b2f2f;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--text-light: #7a6c5d;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--white: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Plus Jakarta Sans', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--dark);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>-webkit-font-smoothing: antialiased;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1200px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px 30px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* --- NAVEGACIÓN --- */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.nav-header {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px 0 40px 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.65rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 1.5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-light);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* --- HERO SECTION --- */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hero-split {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 80px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hero-content { flex: 1; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hero-image { flex: 1; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 1024px) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.hero-split { flex-direction: column; text-align: center; gap: 40px; }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.hero-content { order: 2; }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.hero-image { order: 1; width: 100%; max-width: 500px; }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>h1 { font-size: 2.5rem !important; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.tagline {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.75rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 2px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: clamp(2.2rem, 5vw, 4rem);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 25px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -1px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.logistics-box {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 25px 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-top: 1px solid rgba(0,0,0,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(0,0,0,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.logistics-item {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 1024px) { .logistics-item { justify-content: center; } }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hero-btns {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 35px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 1024px) {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>.hero-btns {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>justify-content: center;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>flex-direction: column;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>gap: 25px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>}<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-cta {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--dark);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px 40px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-secondary {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.7rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 1.5px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--dark);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: underline;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-underline-offset: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-cta:hover { background: var(--accent); transform: translateY(-3px); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-secondary:hover { color: var(--accent); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hero-image img {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 20px 40px rgba(0,0,0,0.06);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* --- BOCATTO NEWS (ESTILO CORREGIDO) --- */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--white);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 100px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 20px 50px rgba(0,0,0,0.04);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: stretch;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-img-col {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex: 1.2;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--white);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-img-col img {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>object-fit: cover; /* Mantiene cover para desktop para diseño split */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-text-col {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 60px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-meta {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.65rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 3px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 25px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-title {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -1.5px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-price {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: monospace;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 25px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.news-desc {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-light);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 35px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.milk-section {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-top: 1px solid rgba(0,0,0,0.05);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding-top: 25px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.milk-title {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.milk-tags {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.milk-tag {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--bg);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.65rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 2px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.milk-tag.premium {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--accent);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* --- MEDIA QUERY CORREGIDO PARA CELULAR --- */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 900px) {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.news-card { flex-direction: column; }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.news-img-col {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>width: 100%;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>min-height: auto;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>height: auto;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.news-img-col img {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>width: 100%;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>height: auto;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>object-fit: contain; /* Evita el recorte lateral */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.news-text-col { padding: 40px 30px; }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>.news-title { font-size: 1.6rem; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* --- PRODUCTOS DESTACADOS --- */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.section-header { text-align: center; margin-bottom: 50px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.section-tag { font-size: 0.7rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; display: block; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h2 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 900px) { .grid { grid-template-columns: 1fr; gap: 40px; } }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: var(--white);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.4s ease;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 15px 35px rgba(0,0,0,0.03);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.07); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.img-box { width: 100%; aspect-ratio: 1/1; overflow: hidden; border-radius: 2px; margin-bottom: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.img-box img {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%; height: 100%; object-fit: cover;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.card:hover .img-box img { transform: scale(1.08); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.info h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; text-transform: uppercase; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.info p { font-size: 0.85rem; color: var(--text-light); line-height: 1.5; margin-bottom: 15px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.tag-bottom { font-size: 0.65rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-top: auto; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.action-btns {<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 100px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-main, .btn-outline {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 400px;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 22px 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 2px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 2px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: 0.3s ease;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-main { background: var(--dark); color: var(--white); border: 1px solid var(--dark); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-main:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-3px); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-outline { background: transparent; color: var(--dark); border: 1px solid var(--dark); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.btn-outline:hover { background: var(--dark); color: white; transform: translateY(-3px); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.apps-section { text-align: center; padding: 80px 0; border-top: 1px solid rgba(0,0,0,0.05); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.main-call { font-size: 1.4rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 40px; display: block; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.apps-row { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.app-text { font-size: 1.2rem; font-weight: 800; color: var(--dark); opacity: 0.5; transition: 0.3s; text-decoration: none; text-transform: lowercase; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.app-text:hover { opacity: 1; color: var(--accent); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.footer-main { padding-top: 60px; border-top: 1px solid rgba(0,0,0,0.05); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 850px) { .footer-main { grid-template-columns: 1fr; text-align: center; } }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.brand-name { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.footer-col h4 { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 20px; font-weight: 800; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.footer-col a { display: block; text-decoration: none; color: var(--dark); font-size: 0.85rem; margin-bottom: 10px; font-weight: 500; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.footer-col a:hover { color: var(--accent); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.legal-bar { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #b5ada5; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.legal-bar a { text-decoration: none; color: inherit; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="nav-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div&gt;Bocatto Brunch&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div&gt;VERACRUZ • BOCA DEL RÍO&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="hero-split"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-content"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="tagline"&gt;Solo para llevar o domicilio&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h1&gt;Tu desayuno favorito,&lt;br&gt;directo a donde estés.&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="logistics-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="logistics-item"&gt;&lt;span&gt;🕗&lt;/span&gt; Lun - Vie | 8 AM a 3 PM&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="logistics-item"&gt;&lt;span&gt;🛵&lt;/span&gt; Ver - Boca (Pregunta por tu zona)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="hero-btns"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="https://wa.me/522295190082" target="_blank" class="btn-cta"&gt;Hacer mi pedido&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;a href="http://www.bocattobrunch.com/menu" class="btn-secondary"&gt;Ver el menú&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="hero-image"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;img src="https://lh3.googleusercontent.com/d/1JMLUtRfn9BajMx3gcdXQnu1N1iZhKmvH" alt="Bocatto Hero"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="news-card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="news-img-col"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;img src="https://drive.google.com/thumbnail?id=1J_52BK512zYBZf_ZTyN-DOqA-7H8Feea&amp;sz=w1200" alt="Chocolate Mexicano Malteada"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="news-text-col"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="news-meta"&gt;Bocatto News • Esta Semana&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="news-title"&gt;Chocolate Mexicano&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="news-price"&gt;$60&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="news-desc"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>Nuestra nueva bebida artesanal con chocolate traído directamente de Oaxaca.<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>Cremosa, con intensas notas de cacao y ese toque de canela que te recordará lo mejor de México.</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="milk-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h4 class="milk-title"&gt;Personaliza tu bebida&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="milk-tags"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="milk-tag"&gt;Entera&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="milk-tag"&gt;Deslactosada&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="milk-tag premium"&gt;Almendras (+$7)&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="section-tag"&gt;Favoritos de la casa&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;Imperdibles Bocatto&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="img-box"&gt;&lt;img src="https://lh3.googleusercontent.com/d/1kpcjhHVi4C4PwnvCZazK3S8UzwW6zGQh" alt="Cuernito Omelette"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Cuernito Omelette&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Huevito estilo omelette, jamón y queso americano fundido en un cuernito suavecito.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="tag-bottom"&gt;Clásico Salado&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="img-box"&gt;&lt;img src="https://lh3.googleusercontent.com/d/1IcdBBE_CObyP8TI56gbldq819NiXAmAa" alt="Hot Cakes Nutella"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Hot Cakes Nutella&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Nuestra receta especial, rellenos de Nutella y servidos con el toque dulce de la casa.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="tag-bottom"&gt;El Favorito Dulce&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="img-box"&gt;&lt;img src="https://lh3.googleusercontent.com/d/1oV6Z-wYdXQF4bjzJ3dSptCRo_TNHQtQa" alt="Latte Nutella"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Latte Nutella Frío&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;Bebida cremosa a base de café espresso, leche y un intenso sabor a Nutella.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="tag-bottom"&gt;Fríamente Delicioso&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="action-btns"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="http://www.bocattobrunch.com/menu" class="btn-main"&gt;Explorar menú completo&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="http://www.bocattobrunch.com/promociones" class="btn-outline"&gt;Ver promociones vigentes&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="apps-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="section-tag"&gt;Delivery Partners&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span class="main-call"&gt;Encuéntranos como Bocatto Brunch en:&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="apps-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://www.rappi.com.mx/veracruz/restaurantes/delivery/600215-bocatto-brunch" target="_blank" class="app-text"&gt;Rappi&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://www.ubereats.com/mx/store/bocatto-brunch/Zq3vVY-uR2O6vfc5YpGlbQ" target="_blank" class="app-text"&gt;Uber&lt;span&gt;Eats&lt;/span&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://web.didiglobal.com/mx/food/veracruz-ver/bocatto-brunch/5764608285853093208/" target="_blank" class="app-text"&gt;Didi&lt;span&gt;Food&lt;/span&gt;&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;footer class="footer-main"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="brand-info"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="brand-name"&gt;Bocatto.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="mailto:contacto@bocattobrunch.com" style="text-decoration: none; color: var(--text-light); font-size: 0.85rem;"&gt;contacto@bocattobrunch.com&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="footer-col"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h4&gt;Atención&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://wa.me/522295190082" target="_blank"&gt;WhatsApp&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="http://www.bocattobrunch.com/menu"&gt;Menú&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="http://www.bocattobrunch.com/promociones"&gt;Promociones&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="footer-col"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;h4&gt;Nuestra Marca&lt;/h4&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://facebook.com/bocattobrunch" target="_blank"&gt;Facebook&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="https://instagram.com/bocattobrunch" target="_blank"&gt;Instagram&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="legal-bar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div&gt;© 2024-2026 Bocatto Brunch&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div&gt;Diseñado por &lt;a href="https://www.harbor48.studio" target="_blank"&gt;harbor48&lt;/a&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div class="container">
+        <header class="nav-header">
+            <div>Bocatto Brunch</div>
+            <div>VERACRUZ • BOCA DEL RÍO</div>
+        </header>
+
+        <section class="hero-split">
+            <div class="hero-content">
+                <span class="tagline">Solo para llevar o domicilio</span>
+                <h1>Tu desayuno favorito,<br>directo a donde estés.</h1>
+                <div class="logistics-box">
+                    <div class="logistics-item">🕗 Lun - Vie | 8 AM a 3 PM</div>
+                    <div class="logistics-item">🛵 Ver - Boca (Pregunta por tu zona)</div>
+                </div>
+                <div class="hero-btns">
+                    <a href="https://wa.me/522295190082" target="_blank" class="btn-cta">Hacer mi pedido</a>
+                    <a href="#" class="btn-secondary">Ver el menú</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&q=80&w=800" alt="Bocatto Hero">
+            </div>
+        </section>
+
+        <section class="news-card">
+            <div class="news-img-col">
+                <img src="https://images.unsplash.com/photo-1544787210-282aa9bc119a?auto=format&fit=crop&q=80&w=800" alt="Chocolate Mexicano">
+            </div>
+            <div class="news-text-col">
+                <span class="tagline">Bocatto News</span>
+                <h3>Chocolate Mexicano</h3>
+                <p>Nuestra nueva bebida artesanal con chocolate traído directamente de Oaxaca. Cremosa y con un toque de canela.</p>
+            </div>
+        </section>
+
+        <div class="grid">
+            <div class="card">
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1550507992-eb63ffee0847?auto=format&fit=crop&q=80&w=400" alt="Cuernito"></div>
+                <h3>Cuernito Omelette</h3>
+                <p>Jamón y queso fundido.</p>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&q=80&w=400" alt="Hot Cakes"></div>
+                <h3>Hot Cakes Nutella</h3>
+                <p>Rellenos de Nutella.</p>
+            </div>
+            <div class="card">
+                <div class="img-box"><img src="https://images.unsplash.com/photo-1572286258217-40142c1c6a70?auto=format&fit=crop&q=80&w=400" alt="Latte"></div>
+                <h3>Latte Nutella</h3>
+                <p>Frío y cremoso.</p>
+            </div>
+        </div>
+
+        <footer>
+            <div class="brand-name">Bocatto.</div>
+            <div style="font-size: 0.7rem;">© 2024-2026 Bocatto Brunch</div>
+        </footer>
+    </div>
 </body>
 </html>
