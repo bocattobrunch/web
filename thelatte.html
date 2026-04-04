@@ -8,9 +8,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
 
         :root {
-            --bg: #fdfaf5; /* Crema suave para The Latte Club */
+            --bg: #fdfaf5;
             --accent: #1b2a8d;
-            --latte-brown: #6d4c41; /* Café distintivo */
+            --latte-brown: #6d4c41;
             --dark: #2d2424;
             --text-light: #8d8175;
         }
@@ -18,7 +18,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-        /* --- BARRA DE NAVEGACIÓN --- */
+        /* --- BARRA DE NAVEGACIÓN (ANCHO COMPLETO) --- */
         .main-nav {
             padding: 30px 0;
             border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -41,8 +41,6 @@
             text-decoration: none;
             color: var(--dark);
         }
-
-        .nav-logo span { color: var(--dark); }
 
         .nav-links {
             display: flex;
@@ -67,14 +65,20 @@
         .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: var(--accent); transition: 0.3s; }
         .nav-links a:hover::after { width: 100%; }
 
-        /* --- SECCIÓN LOGO --- */
+        /* --- CONTENIDO CENTRAL --- */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 25px;
+        }
+
         .hero-latte {
             text-align: center;
-            padding: 80px 25px 40px 25px;
+            margin-bottom: 60px;
         }
 
         .latte-logo-img {
-            max-width: 220px; /* Tamaño prudente */
+            max-width: 220px;
             height: auto;
             margin-bottom: 20px;
         }
@@ -85,13 +89,6 @@
             letter-spacing: 5px;
             color: var(--latte-brown);
             font-weight: 800;
-        }
-
-        /* --- DISEÑO DEL MENÚ --- */
-        .menu-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 25px 100px 25px;
         }
 
         .latte-section {
@@ -105,7 +102,7 @@
         }
 
         .latte-section-title h2 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: -1px;
             display: inline-block;
@@ -126,7 +123,6 @@
             z-index: 1;
         }
 
-        /* Grid de Productos */
         .latte-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -163,23 +159,46 @@
             font-weight: 500;
         }
 
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 20px; }
-            .latte-grid { grid-template-columns: 1fr; gap: 30px; }
-            .latte-section-title h2 { font-size: 1.4rem; }
+        /* --- FOOTER (ANCHO COMPLETO) --- */
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 30px 40px 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- FOOTER UNIFICADO --- */
-        .footer-main { padding-top: 60px; border-top: 1px solid rgba(0,0,0,0.05); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-top: 60px; }
+        .footer-main { 
+            display: grid; 
+            grid-template-columns: 2fr 1fr 1fr; 
+            gap: 40px; 
+        }
         
         .footer-brand-name { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }
         .footer-col h4 { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 20px; font-weight: 800; }
         .footer-col a { display: block; text-decoration: none; color: var(--dark); font-size: 0.85rem; margin-bottom: 10px; font-weight: 500; transition: 0.2s; }
         .footer-col a:hover { color: var(--accent); }
 
-        .legal-bar { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #b5ada5; }
+        .legal-bar { 
+            margin-top: 80px; 
+            padding-top: 30px; 
+            border-top: 1px solid rgba(0,0,0,0.05); 
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 0.65rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: #b5ada5; 
+        }
         .legal-bar a { text-decoration: none; color: inherit; transition: 0.2s; }
         .legal-bar a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 20px; }
+            .latte-grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer-main { grid-template-columns: 1fr; text-align: center; }
+            .legal-bar { flex-direction: column; gap: 15px; align-items: center; }
+        }
     </style>
 </head>
 <body>
@@ -196,12 +215,11 @@
         </div>
     </nav>
 
-    <section class="hero-latte">
-        <img src="https://drive.google.com/thumbnail?id=1AEWE6dU0NxzNDSTn9ggE44uaIq6jr1jV&sz=w1000" alt="The Latte Club Logo" class="latte-logo-img">
-        <div class="latte-tagline">Menú de Especialidad</div>
-    </section>
-
-    <div class="menu-wrapper">
+    <div class="main-content">
+        <section class="hero-latte">
+            <img src="https://drive.google.com/thumbnail?id=1AEWE6dU0NxzNDSTn9ggE44uaIq6jr1jV&sz=w1000" alt="The Latte Club Logo" class="latte-logo-img">
+            <div class="latte-tagline">Menú de Especialidad</div>
+        </section>
         
         <section class="latte-section">
             <div class="latte-section-title"><h2>The Latte Series</h2></div>
@@ -264,8 +282,10 @@
                 </div>
             </div>
         </section>
+    </div>
 
-        <footer class="footer-main">
+    <footer class="footer-wrapper">
+        <div class="footer-main">
             <div class="brand-info">
                 <div class="footer-brand-name">Bocatto.</div>
                 <a href="mailto:contacto@bocattobrunch.com" style="text-decoration: none; color: var(--text-light); font-size: 0.85rem;">contacto@bocattobrunch.com</a>
@@ -281,13 +301,13 @@
                 <a href="https://facebook.com/bocattobrunch" target="_blank">Facebook</a>
                 <a href="https://instagram.com/bocattobrunch" target="_blank">Instagram</a>
             </div>
-        </footer>
+        </div>
 
         <div class="legal-bar">
             <div>© 2024-2026 Bocatto Brunch</div>
             <div>Diseñado por <a href="https://www.harbor48.studio" target="_blank" style="text-decoration: none; color: inherit;">harbor48</a></div>
         </div>
-    </div>
+    </footer>
 
 </body>
 </html>
