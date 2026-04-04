@@ -91,10 +91,15 @@
 
         .main-container { max-width: 800px; margin: 0 auto; padding: 60px 25px 120px 25px; }
 
-        /* --- HEADER --- */
-        header { text-align: center; margin-bottom: 30px; }
-        .brand { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 5px; }
-        .subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: var(--accent); font-weight: 800; }
+        /* --- HEADER ACTUALIZADO --- */
+        header { text-align: center; margin-bottom: 60px; }
+        .main-title { 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            font-weight: 800; 
+            letter-spacing: -1.5px; 
+            color: var(--dark);
+            text-transform: uppercase;
+        }
 
         /* --- CINTA DE PROMOS --- */
         .promo-bar {
@@ -238,8 +243,7 @@
 
     <div class="main-container">
         <header>
-            <div class="brand">Bocatto.</div>
-            <div class="subtitle">Carta de Alimentos & Bebidas</div>
+            <h1 class="main-title">Carta de Alimentos & Bebidas</h1>
         </header>
 
         <div class="promo-bar">
