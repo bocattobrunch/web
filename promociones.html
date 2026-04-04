@@ -91,10 +91,15 @@
 
         .container { max-width: 900px; margin: 0 auto; padding: 60px 25px; }
 
-        /* --- HEADER --- */
+        /* --- HEADER ACTUALIZADO --- */
         header { text-align: center; margin-bottom: 80px; }
-        .brand-header { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }
-        .section-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: var(--accent); font-weight: 800; }
+        .main-title { 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            font-weight: 800; 
+            letter-spacing: -1.5px; 
+            color: var(--dark);
+            text-transform: uppercase;
+        }
 
         /* --- PROMOS ESTILO APPS --- */
         .promo-list { display: flex; flex-direction: column; gap: 70px; margin-bottom: 100px; }
@@ -178,8 +183,7 @@
 
     <div class="container">
         <header>
-            <div class="brand-header">Bocatto.</div>
-            <span class="section-tag">Promociones Vigentes</span>
+            <h1 class="main-title">Promociones Vigentes</h1>
         </header>
 
         <div class="promo-list">
