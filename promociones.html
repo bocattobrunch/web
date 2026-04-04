@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promociones | Bocatto Brunch</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
+
+        :root {
+            --bg: #f9f8f6;
+            --accent: #1b2a8d;
+            --dark: #3b2f2f;
+            --text-light: #7a6c5d;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* --- BARRA DE NAVEGACIÓN --- */
+        .main-nav {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background-color: var(--bg);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .nav-logo span { color: var(--dark); } /* Punto color café */
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dark);
+            opacity: 0.6;
+            transition: 0.3s;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* Línea azul al pasar el mouse */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 20px; }
+            .nav-links { gap: 15px; }
+            .nav-links a { font-size: 0.6rem; }
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 25px; }
+
+        /* --- HEADER --- */
+        header { text-align: center; margin-bottom: 80px; }
+        .brand-header { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }
+        .section-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: var(--accent); font-weight: 800; }
+
+        /* --- PROMOS ESTILO APPS --- */
+        .promo-list { display: flex; flex-direction: column; gap: 70px; margin-bottom: 100px; }
+
+        .promo-item {
+            text-decoration: none;
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s ease;
+            text-align: center;
+        }
+
+        .app-name {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -3px;
+            text-transform: lowercase;
+            opacity: 0.4;
+            transition: 0.3s;
+            line-height: 1;
+        }
+
+        .promo-detail {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .promo-validity {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 8px;
+            opacity: 0.5;
+        }
+
+        /* EFECTO HOVER */
+        .promo-item:hover .app-name { opacity: 1; color: var(--accent); transform: translateY(-5px); }
+        .promo-item:hover .promo-detail { opacity: 1; color: var(--accent); }
+        .promo-item:hover .promo-validity { opacity: 1; }
+
+        /* --- FOOTER UNIFICADO --- */
+        .footer-main { padding-top: 60px; border-top: 1px solid rgba(0,0,0,0.05); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        
+        @media (max-width: 850px) { 
+            .footer-main { grid-template-columns: 1fr; text-align: center; gap: 40px; } 
+            .app-name { font-size: 2.2rem; }
+        }
+
+        .footer-brand-name { font-size: 2.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 10px; }
+        .footer-col h4 { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 20px; font-weight: 800; }
+        .footer-col a { display: block; text-decoration: none; color: var(--dark); font-size: 0.85rem; margin-bottom: 10px; font-weight: 500; transition: 0.2s; }
+        .footer-col a:hover { color: var(--accent); }
+
+        .legal-bar { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #b5ada5; }
+        .legal-bar a { text-decoration: none; color: inherit; transition: 0.2s; }
+        .legal-bar a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="https://www.bocattobrunch.com" class="nav-logo">Bocatto<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="menu.html">Menú</a></li>
+                <li><a href="promociones.html">Promociones</a></li>
+                <li><a href="thelatte.html">The Latte Club</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <div class="brand-header">Bocatto.</div>
+            <span class="section-tag">Promociones Vigentes</span>
+        </header>
+
+        <div class="promo-list">
+            
+            <a href="https://wa.me/522295190082" target="_blank" class="promo-item">
+                <div class="app-name" style="opacity: 0.9; color: var(--dark);">whatsapp <span style="font-weight:300">&</span> local</div>
+                <div class="promo-detail">2x1 y 3x2 en Smoothies Picositos (470ml)</div>
+                <div class="promo-validity">Sabores combinables • Vigente hasta 31 DIC 2026</div>
+            </a>
+
+            <a href="https://web.didiglobal.com/mx/food/veracruz-ver/bocatto-brunch/5764608285853093208/" target="_blank" class="promo-item">
+                <div class="app-name">didi<span style="font-weight:300">food</span></div>
+                <div class="promo-detail">20-39% OFF + Envío Gratis (mín. $150)</div>
+                <div class="promo-validity">Vigente hasta 31 DIC 2026</div>
+            </a>
+
+            <a href="https://www.rappi.com.mx/veracruz/restaurantes/delivery/600215-bocatto-brunch" target="_blank" class="promo-item">
+                <div class="app-name">rappi</div>
+                <div class="promo-detail">20% OFF en todo el menú</div>
+                <div class="promo-validity">Vigente hasta 31 DIC 2026</div>
+            </a>
+
+            <a href="https://www.ubereats.com/mx/store/bocatto-brunch/Zq3vVY-uR2O6vfc5YpGlbQ" target="_blank" class="promo-item">
+                <div class="app-name">uber<span style="font-weight:300">eats</span></div>
+                <div class="promo-detail">20% OFF en artículos seleccionados</div>
+                <div class="promo-validity">Vigente hasta 31 DIC 2026</div>
+            </a>
+
+        </div>
+
+        <footer class="footer-main">
+            <div class="brand-info">
+                <div class="footer-brand-name">Bocatto.</div>
+                <a href="mailto:contacto@bocattobrunch.com" style="text-decoration: none; color: var(--text-light); font-size: 0.85rem;">contacto@bocattobrunch.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Atención</h4>
+                <a href="https://wa.me/522295190082" target="_blank">WhatsApp</a>
+                <a href="menu.html">Menú</a>
+                <a href="promociones.html">Promociones</a>
+            </div>
+            <div class="footer-col">
+                <h4>Nuestra Marca</h4>
+                <a href="https://facebook.com/bocattobrunch" target="_blank">Facebook</a>
+                <a href="https://instagram.com/bocattobrunch" target="_blank">Instagram</a>
+            </div>
+        </footer>
+
+        <div class="legal-bar">
+            <div>© 2024-2026 Bocatto Brunch</div>
+            <div>Diseñado por <a href="https://www.harbor48.studio" target="_blank" style="text-decoration: none; color: inherit;">harbor48</a></div>
+        </div>
+    </div>
+
+</body>
+</html>
