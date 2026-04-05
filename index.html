@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-<link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bocatto Brunch | Veracruz</title>
@@ -104,24 +103,12 @@
             padding: 20px 30px;
         }
 
-        /* --- NAVEGACIÓN SECUNDARIA --- */
-        .nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0 40px 0;
-            text-transform: uppercase;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: var(--text-light);
-        }
-
         /* --- HERO SECTION --- */
         .hero-split {
             display: flex;
             align-items: center;
             gap: 60px;
+            margin-top: 30px; /* Reducción de espacio ajustada aquí */
             margin-bottom: 80px;
         }
 
@@ -129,7 +116,7 @@
         .hero-image { flex: 1; }
 
         @media (max-width: 1024px) {
-            .hero-split { flex-direction: column; text-align: center; gap: 40px; }
+            .hero-split { flex-direction: column; text-align: center; gap: 40px; margin-top: 20px; }
             .hero-content { order: 2; }
             .hero-image { order: 1; width: 100%; max-width: 500px; }
             h1 { font-size: 2.5rem !important; }
@@ -318,11 +305,7 @@
     </nav>
 
     <div class="container">
-        <header class="nav-header">
-            <div>Bocatto Brunch</div>
-            <div>VERACRUZ • BOCA DEL RÍO</div>
-        </header>
-
+        
         <section class="hero-split">
             <div class="hero-content">
                 <span class="tagline">Solo para llevar o domicilio</span>
