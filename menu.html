@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bocatto Brunch | Menú</title>
+    <title>Menú | Bocatto Brunch</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap');
 
@@ -24,6 +24,8 @@
             padding: 30px 0;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             background-color: var(--bg);
+            position: relative;
+            z-index: 100;
         }
 
         .nav-container {
@@ -43,7 +45,7 @@
             color: var(--dark);
         }
 
-        .nav-logo span { color: var(--dark); } /* Punto color café */
+        .nav-logo span { color: var(--dark); }
 
         .nav-links {
             display: flex;
@@ -65,15 +67,12 @@
         }
 
         .nav-links a:hover { opacity: 1; }
-
-        /* Línea azul al pasar el mouse */
         .nav-links a::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: 0;
-            left: 0;
+            bottom: 0; left: 0;
             background-color: var(--accent);
             transition: 0.3s;
         }
@@ -86,18 +85,17 @@
         }
 
         /* --- CONTENEDOR PRINCIPAL --- */
-        .main-container { max-width: 1000px; margin: 0 auto; padding: 60px 25px 120px 25px; }
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 60px 25px 20px 25px; }
 
         header { text-align: center; margin-bottom: 50px; }
         .main-title { 
             font-size: clamp(2rem, 5vw, 3rem); 
             font-weight: 800; 
             letter-spacing: -1.5px; 
-            color: var(--accent); /* Título Azul */
+            color: var(--accent);
             text-transform: uppercase;
         }
 
-        /* --- CINTA DE PROMOS --- */
         .promo-bar {
             background: rgba(27, 42, 141, 0.05);
             border: 1px solid rgba(27, 42, 141, 0.1);
@@ -121,11 +119,8 @@
         .promo-bar a::after { content: '→'; font-size: 0.8rem; transition: 0.3s; }
         .promo-bar:hover a::after { transform: translateX(5px); }
 
-        /* --- BARRA DE BÚSQUEDA INTUITIVA --- */
-        .search-wrapper {
-            margin-bottom: 60px;
-            position: relative;
-        }
+        /* --- BUSCADOR --- */
+        .search-wrapper { margin-bottom: 60px; }
         .search-input {
             width: 100%;
             padding: 20px 25px;
@@ -138,37 +133,39 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.02);
             transition: all 0.3s ease;
         }
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(27, 42, 141, 0.08);
-        }
+        .search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 10px 30px rgba(27, 42, 141, 0.08); }
         .search-input::placeholder { color: #a59e96; font-weight: 500; }
 
-        /* --- CATEGORÍAS Y GRID --- */
-        .menu-category { margin-bottom: 70px; }
-        
+        /* --- MENÚ GRID --- */
+        .menu-category { margin-bottom: 80px; }
         .category-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: var(--accent);
             border-bottom: 2px solid rgba(27, 42, 141, 0.1);
             padding-bottom: 12px;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
         
         .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 35px 60px;
+            gap: 40px 60px;
+            align-items: start;
         }
 
-        .menu-item { display: flex; flex-direction: column; }
+        .menu-item { display: flex; flex-direction: column; break-inside: avoid; }
+        
+        .item-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 18px;
+            background-color: #eee;
+        }
         
         .item-header {
             display: flex;
@@ -177,7 +174,7 @@
             margin-bottom: 6px;
         }
 
-        .item-name { font-weight: 800; font-size: 1.05rem; color: var(--dark); flex: 1; padding-right: 15px; line-height: 1.3; text-transform: capitalize; }
+        .item-name { font-weight: 800; font-size: 1.05rem; color: var(--dark); flex: 1; padding-right: 15px; line-height: 1.3; }
         .item-price { font-weight: 800; font-size: 1.1rem; color: var(--dark); }
         .item-desc { font-size: 0.85rem; color: var(--text-light); font-weight: 500; line-height: 1.4; }
 
@@ -191,20 +188,19 @@
         }
 
         @media (max-width: 768px) {
-            .menu-grid { grid-template-columns: 1fr; gap: 30px; }
-            .category-title { font-size: 1.2rem; }
+            .menu-grid { grid-template-columns: 1fr; gap: 40px; }
         }
 
-        /* --- APPS SECTION --- */
-        .apps-section { text-align: center; padding: 80px 0; border-top: 1px solid rgba(0,0,0,0.05); margin-top: 20px; }
+        /* --- SECCIONES FINALES --- */
+        .apps-section { max-width: 1000px; margin: 0 auto; text-align: center; padding: 60px 25px; border-top: 1px solid rgba(0,0,0,0.05); }
         .apps-tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); font-weight: 800; margin-bottom: 15px; display: block; }
         .main-call { font-size: 1.4rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 40px; display: block; }
         .apps-row { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; }
         .app-text { font-size: 1.2rem; font-weight: 800; color: var(--dark); opacity: 0.5; transition: 0.3s; text-decoration: none; text-transform: lowercase; }
         .app-text:hover { opacity: 1; color: var(--accent); }
 
-        /* --- FOOTER UNIFICADO --- */
-        .footer-main { padding-top: 60px; border-top: 1px solid rgba(0,0,0,0.05); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .footer-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 25px 60px 25px; }
+        .footer-main { padding-top: 60px; border-top: 1px solid rgba(0,0,0,0.05); display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; width: 100%; }
         
         @media (max-width: 850px) { 
             .footer-main { grid-template-columns: 1fr; text-align: center; gap: 40px; } 
@@ -222,14 +218,19 @@
 
         /* --- BOTÓN FLOTANTE WHATSAPP --- */
         .btn-floating {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            width: 85%; max-width: 350px; background: var(--dark); color: white;
-            padding: 18px; text-align: center; text-decoration: none;
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--dark); color: white;
+            padding: 18px 30px; text-align: center; text-decoration: none;
             font-weight: 800; text-transform: uppercase; font-size: 0.75rem;
-            letter-spacing: 1.5px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            letter-spacing: 1.5px; border-radius: 50px; box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             z-index: 1000; transition: 0.3s ease;
         }
-        .btn-floating:hover { background: var(--accent); transform: translateX(-50%) translateY(-3px); }
+        .btn-floating:hover { background: var(--accent); transform: translateY(-3px); }
+
+        @media (max-width: 768px) {
+            .btn-floating { left: 50%; right: auto; transform: translateX(-50%); width: 85%; max-width: 350px; border-radius: 4px; padding: 18px; }
+            .btn-floating:hover { transform: translateX(-50%) translateY(-3px); }
+        }
     </style>
 </head>
 <body>
@@ -246,7 +247,7 @@
         </div>
     </nav>
 
-    <a href="https://wa.me/522295190082" target="_blank" class="btn-floating">Ordenar por WhatsApp</a>
+    <a href="https://wa.me/522295190082" target="_blank" class="btn-floating">Hacer pedido</a>
 
     <div class="main-container">
         <header>
@@ -258,7 +259,7 @@
         </div>
 
         <div class="search-wrapper">
-            <input type="text" id="searchInput" class="search-input" placeholder="Busca por platillo, ingrediente o antojo (ej. Nutella, Cuernito)...">
+            <input type="text" id="searchInput" class="search-input" placeholder="Busca por platillo, ingrediente o antojo...">
         </div>
 
         <div id="noResults">No encontramos platillos con esa búsqueda. ¡Intenta con otra palabra!</div>
@@ -267,122 +268,87 @@
             <h2 class="category-title">Combos Bocatto</h2>
             <div class="menu-grid">
                 <div class="menu-item">
+                    <img src="https://drive.google.com/thumbnail?id=1uft1vw6Gu8ExGH7uCnqDLB_LlzHwFzYW&sz=w800" alt="Desayuno Americano" class="item-image">
+                    <div class="item-header"><span class="item-name">Desayuno Americano + Café</span><span class="item-price">$85.00</span></div>
+                    <span class="item-desc">2 hot cakes con maple, huevos revueltos al momento y tocino frito. Incluye café americano (frío o caliente).</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Cuernito + Limonada</span><span class="item-price">$80.00</span></div>
+                    <span class="item-desc">Nuestro clásico cuernito de jamón con queso amarillo derretido y vegetales, acompañado de una refrescante limonada de frutos rojos.</span>
+                </div>
+                <div class="menu-item">
                     <div class="item-header"><span class="item-name">Cuernito + Té Frío</span><span class="item-price">$55.00</span></div>
-                    <span class="item-desc">Cuernito de jamón con queso amarillo y vegetales, acompañado de un té negro con limón frío.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Cuernito Deluxe + Latte Frío</span><span class="item-price">$85.00</span></div>
-                    <span class="item-desc">Cuernito con queso Philadelphia y tocino frito, acompañado con un latte frío.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Cuernito + Limonada de Frutos Rojos</span><span class="item-price">$80.00</span></div>
-                    <span class="item-desc">Cuernito de jamón con queso amarillo y vegetales, acompañado con una limonada de frutos rojos.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Hot Cakes Nutella + Latte Frío</span><span class="item-price">$85.00</span></div>
-                    <span class="item-desc">Orden de 2 hot cakes rellenos de Nutella, acompañados con un latte frío.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Omelette + Café</span><span class="item-price">$90.00</span></div>
-                    <span class="item-desc">Omelette de jamón con queso y frijoles refritos y micha fileteada, acompañado con un café americano frío o caliente.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Club Sándwich con papas + Nutella Latte</span><span class="item-price">$99.00</span></div>
-                    <span class="item-desc">Club sándwich de 3 niveles, relleno con jamón, queso amarillo, vegetales y aderezos, servido con papas chips y un latte de Nutella frío.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Cuernito + Papas + Chipotle</span><span class="item-price">$65.00</span></div>
-                    <span class="item-desc">Cuernito de jamón con queso amarillo y vegetales, acompañado de papas chips y aderezo de chipotle dulce.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Cuernito Americano + Papas + Coca Cola</span><span class="item-price">$85.00</span></div>
-                    <span class="item-desc">Cuernito relleno de huevo, tocino frito y queso amarillo, servido con papas chips y Coca Cola 350ml.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Cuernito + Papas + Coca Cola</span><span class="item-price">$77.00</span></div>
-                    <span class="item-desc">Cuernito de jamón con queso amarillo y vegetales, servido con papas chips y Coca Cola 350ml.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Hot Cakes + Latte Frío</span><span class="item-price">$70.00</span></div>
-                    <span class="item-desc">Orden de 3 hot cakes, acompañados con un latte frío.</span>
+                    <span class="item-desc">Cuernito de jamón, queso y vegetales, con un refrescante te negro ne con limón frío.</span>
                 </div>
                 <div class="menu-item">
                     <div class="item-header"><span class="item-name">Cuernito + Smoothie Picosito</span><span class="item-price">$70.00</span></div>
-                    <span class="item-desc">Cuernito de jamón con queso amarillo y vegetales, servido con un smoothie picosito.</span>
+                    <span class="item-desc">Cuernito de jamón con queso y vegetales, servido con un smoothie picosito (mango o sandía) ideal para el calor.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Cuernito + Papas + Chipotle</span><span class="item-price">$65.00</span></div>
+                    <span class="item-desc">Cuernito clásico de jamón y queso, acompañado de crujientes papas chips y nuestro aderezo especial de chipotle dulce.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Cuernito + Papas + Coca Cola</span><span class="item-price">$77.00</span></div>
+                    <span class="item-desc">Cuernito de jamón y vegetales, papas chips y una Coca-Cola bien fría (350ml).</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Cuernito Americano + Papas + Coca Cola</span><span class="item-price">$85.00</span></div>
+                    <span class="item-desc">Cuernito con huevo, tocino crujiente y queso amarillo, servido con papas chips y Coca-Cola (350ml).</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Cuernito Deluxe + Latte Frío</span><span class="item-price">$85.00</span></div>
+                    <span class="item-desc">El favorito indulgente: Cuernito con queso Philadelphia y tocino doradito, acompañado de un Latte frío.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Hot Cakes + Latte Frío</span><span class="item-price">$70.00</span></div>
+                    <span class="item-desc">Orden de 3 hot cakes esponjosos, acompañados de un Latte frío.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Hot Cakes Nutella + Latte Frío</span><span class="item-price">$85.00</span></div>
+                    <span class="item-desc">Orden de 2 hot cakes rellenitos de Nutella derretida, acompañados de un Latte frío.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Omelette + Café</span><span class="item-price">$90.00</span></div>
+                    <span class="item-desc">Omelette de jamón y queso, acompañado de frijolitos refritos, micha fileteada calientita y café americano (frío o caliente).</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Club Sandwich + Nutella Latte</span><span class="item-price">$99.00</span></div>
+                    <span class="item-desc">Club sándwich de 3 pisos con jamón, queso, vegetales y aderezos. Servido con papas chips y nuestro dulce Latte de Nutella frío.</span>
                 </div>
             </div>
         </section>
 
         <section class="menu-category">
-            <h2 class="category-title">Omelettes</h2>
+            <h2 class="category-title">Cuernitos, Sándwiches y Bagels</h2>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Jamón y Queso</span><span class="item-price">$50.00</span></div>
-                    <span class="item-desc">Omelette grande, relleno de jamón con queso amarillo.</span>
+                    <div class="item-header"><span class="item-name">Cuernito Huevo, Jamón y Queso</span><span class="item-price">$45.00</span></div>
+                    <span class="item-desc">Nuestro top ventas: Relleno con un jugoso huevito estilo omelette, jamón y queso amarillo.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Tocino y Manchego</span><span class="item-price">$70.00</span></div>
-                    <span class="item-desc">Omelette grande, relleno de tocino frito y queso manchego.</span>
+                    <div class="item-header"><span class="item-name">Cuernito Clásico (Jamón y Queso)</span><span class="item-price">$35.00</span></div>
+                    <span class="item-desc">El de siempre: Jamón, queso amarillo derretido y vegetales frescos.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">3 Quesos</span><span class="item-price">$70.00</span></div>
-                    <span class="item-desc">Omelette grande, relleno con queso amarillo, manchego y Philadelphia.</span>
+                    <div class="item-header"><span class="item-name">Cuernito Americano</span><span class="item-price">$55.00</span></div>
+                    <span class="item-desc">Relleno con tocino crujiente, huevito estilo omelette y queso amarillo.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Jamón, Tocino y Manchego</span><span class="item-price">$75.00</span></div>
-                    <span class="item-desc">Omelette grande, relleno con jamón, tocino frito y queso manchego.</span>
+                    <div class="item-header"><span class="item-name">Cuernito Deluxe</span><span class="item-price">$60.00</span></div>
+                    <span class="item-desc">Para los amantes del queso: Relleno de abundante queso crema Philadelphia y tocino frito.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Con Verduras</span><span class="item-price">$50.00</span></div>
-                    <span class="item-desc">Omelette grande, relleno de mezcla de verduras julianas.</span>
+                    <div class="item-header"><span class="item-name">Bagel Tocino</span><span class="item-price">$65.00</span></div>
+                    <span class="item-desc">Con un toque especial de Philadelphia a la pimienta y tocino doradito.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Con Verduras, Jamón y Manchego</span><span class="item-price">$70.00</span></div>
-                    <span class="item-desc">Omelette grande, relleno de mezcla de verduras julianas, jamón y queso manchego.</span>
+                    <div class="item-header"><span class="item-name">Bagel Huevo</span><span class="item-price">$60.00</span></div>
+                    <span class="item-desc">Philadelphia a la pimienta, huevito revuelto y jamón.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Frijoles Refritos</span><span class="item-price">$10.00</span></div>
-                    <span class="item-desc">Acompaña tu omelette con frijoles refritos con queso seco.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Micha Fileteada</span><span class="item-price">$6.00</span></div>
-                    <span class="item-desc">Acompaña tu orden de huevos u omelette con micha fileteada calientita.</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="menu-category">
-            <h2 class="category-title">Huevos Revueltos</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Con Jamón</span><span class="item-price">$60.00</span></div>
-                    <span class="item-desc">3 huevos revueltos con jamón, acompañados con frijoles refritos.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Con Tocino</span><span class="item-price">$80.00</span></div>
-                    <span class="item-desc">3 huevos revueltos con tocino frito, acompañados de frijoles refritos.</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="menu-category">
-            <h2 class="category-title">Cuernitos</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Jamón y Queso</span><span class="item-price">$35.00</span></div>
-                    <span class="item-desc">Cuernito de jamón con queso amarillo y vegetales.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Huevo, Jamón y Queso</span><span class="item-price">$45.00</span></div>
-                    <span class="item-desc">Cuernito relleno con huevito estilo omelette, jamón y queso amarillo.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Americano</span><span class="item-price">$55.00</span></div>
-                    <span class="item-desc">Cuernito relleno con tocino frito, huevito estilo omelette y queso amarillo.</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Deluxe</span><span class="item-price">$60.00</span></div>
-                    <span class="item-desc">Cuernito relleno con queso crema y tocino frito.</span>
+                    <div class="item-header"><span class="item-name">Club Sandwich con Papas</span><span class="item-price">$60.00</span></div>
+                    <span class="item-desc">El rey de la casa: 3 niveles de sabor con jamón, queso amarillo, vegetales y aderezos de la casa, acompañado de papas chips.</span>
                 </div>
             </div>
         </section>
@@ -391,42 +357,64 @@
             <h2 class="category-title">Hot Cakes</h2>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">3 Hot Cakes (Maple o Mermelada)</span><span class="item-price">$35.00</span></div>
-                    <span class="item-desc">Orden de 3 hot cakes acompañados con jarabe de maple o mermelada.</span>
+                    <img src="https://drive.google.com/thumbnail?id=154eQBgErqwwl2zqE2DTndEyxO2qUGf_I&sz=w800" alt="Hot Cakes Nutella" class="item-image">
+                    <div class="item-header"><span class="item-name">Rellenos de Nutella</span><span class="item-price">$52.00</span></div>
+                    <span class="item-desc">2 hot cakes calientitos con corazón de Nutella derretida.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">2 Hot Cakes Rellenos de Nutella</span><span class="item-price">$55.00</span></div>
-                    <span class="item-desc">Orden de 2 hot cakes rellenos con Nutella.</span>
+                    <div class="item-header"><span class="item-name">Jamón, Queso Philadelphia y Tocino</span><span class="item-price">$120.00</span></div>
+                    <span class="item-desc">Nuestra joya de la corona: 2 hot cakes rellenos de jamón y queso, coronados con queso Philadelphia y tocino frito.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">3 Hot Cakes con Tocino y Maple</span><span class="item-price">$60.00</span></div>
-                    <span class="item-desc">Orden de 3 hot cakes, coronados con tocino frito y jarabe de maple.</span>
+                    <div class="item-header"><span class="item-name">Rellenos de Jamón y Queso</span><span class="item-price">$80.00</span></div>
+                    <span class="item-desc">2 hot cakes rellenos de la mezcla perfecta de jamón, queso y aderezo.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Con Jamón y Queso</span><span class="item-price">$80.00</span></div>
-                    <span class="item-desc">Orden de 2 hot cakes rellenos de jamón con queso y aderezo.</span>
+                    <div class="item-header"><span class="item-name">Con Tocino y Maple</span><span class="item-price">$60.00</span></div>
+                    <span class="item-desc">3 hot cakes clásicos coronados con tocino frito crujiente y dulce jarabe de maple.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Con Jamón y Queso, Preparados</span><span class="item-price">$120.00</span></div>
-                    <span class="item-desc">Orden de 2 hot cakes rellenos de jamón con queso, coronados con Philadelphia y tocino frito.</span>
+                    <div class="item-header"><span class="item-name">Clásicos (Maple o Mermelada)</span><span class="item-price">$35.00</span></div>
+                    <span class="item-desc">Orden de 3 hot cakes doraditos para empezar bien el día.</span>
                 </div>
             </div>
         </section>
 
         <section class="menu-category">
-            <h2 class="category-title">Sándwiches y Bagels</h2>
+            <h2 class="category-title">Omelettes y Huevos</h2>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Club Sándwich con Papas Chips</span><span class="item-price">$60.00</span></div>
-                    <span class="item-desc">Club sándwich de 3 niveles, relleno con jamón, queso amarillo, vegetales y aderezos, acompañado con papas chips.</span>
+                    <img src="https://drive.google.com/thumbnail?id=16GsLO8HsdnBU626wyrj-W9-r9DQ0Sn2r&sz=w800" alt="Omelette Tocino y Queso" class="item-image">
+                    <div class="item-header"><span class="item-name">Omelette Tocino y Manchego</span><span class="item-price">$70.00</span></div>
+                    <span class="item-desc">Omelette grande relleno de tocino frito y queso manchego.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Bagel Tocino</span><span class="item-price">$65.00</span></div>
-                    <span class="item-desc">Bagel con spread de Philadelphia y pimienta, con tocino frito.</span>
+                    <div class="item-header"><span class="item-name">Huevo con Tocino</span><span class="item-price">$80.00</span></div>
+                    <span class="item-desc">3 huevos revueltos con tocino frito, acompañados de frijoles refritos.</span>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Bagel Huevo</span><span class="item-price">$60.00</span></div>
-                    <span class="item-desc">Bagel con spread de Philadelphia y pimienta, con huevito y jamón.</span>
+                    <div class="item-header"><span class="item-name">Omelette de Tres Quesos</span><span class="item-price">$70.00</span></div>
+                    <span class="item-desc">Para derretirse: Omelette grande relleno de queso amarillo, queso manchego y Philadelphia.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Omelette Jamón, Tocino y Queso</span><span class="item-price">$75.00</span></div>
+                    <span class="item-desc">El más pedido de los omelettes: Relleno de jamón, tocino frito y queso amarillo.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Omelette Jamón y Queso</span><span class="item-price">$50.00</span></div>
+                    <span class="item-desc">El clásico infalible relleno de jamón y queso amarillo.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Omelette con Verduras, Jamón y Queso</span><span class="item-price">$70.00</span></div>
+                    <span class="item-desc">Con un toque fresco de vegetales en juliana, jamón y manchego.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Omelette Vegetariano</span><span class="item-price">$50.00</span></div>
+                    <span class="item-desc">Relleno de una mezcla fresca de verduras en juliana.</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Huevos con Jamón</span><span class="item-price">$60.00</span></div>
+                    <span class="item-desc">3 huevos revueltos con jamón, servidos con frijolitos refritos.</span>
                 </div>
             </div>
         </section>
@@ -435,89 +423,136 @@
             <h2 class="category-title">Complementos y Extras</h2>
             <div class="menu-grid">
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Papas Chips</span><span class="item-price">$20.00</span></div>
-                    <span class="item-desc">Porción de papas chips.</span>
+                    <div class="item-header"><span class="item-name">Frijoles Refritos con Queso Seco</span><span class="item-price">$10.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Micha Fileteada Calientita</span><span class="item-price">$6.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Huevo Extra (1 pza)</span><span class="item-price">$9.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Extra Tocino (4 pzas)</span><span class="item-price">$25.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Extra Jamón (2 pzas)</span><span class="item-price">$15.00</span></div>
                 </div>
                 <div class="menu-item">
                     <div class="item-header"><span class="item-name">Aderezo Chipotle Dulce</span><span class="item-price">$10.00</span></div>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Tocino</span><span class="item-price">$25.00</span></div>
-                    <span class="item-desc">Porción extra de tocino (4 pzas).</span>
+                    <div class="item-header"><span class="item-name">Cambia tu cuernito por bagel</span><span class="item-price">$10.00</span></div>
                 </div>
                 <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Jamón</span><span class="item-price">$15.00</span></div>
-                    <span class="item-desc">Porción extra de jamón (2 pzas).</span>
-                </div>
-                <div class="menu-item">
-                    <div class="item-header"><span class="item-name">Huevo</span><span class="item-price">$9.00</span></div>
-                    <span class="item-desc">Añade 1 huevo extra.</span>
+                    <div class="item-header"><span class="item-name">Papas Chips</span><span class="item-price">$20.00</span></div>
                 </div>
             </div>
         </section>
 
         <section class="menu-category">
-            <h2 class="category-title">Bebidas Calientes</h2>
+            <h2 class="category-title">Bebidas Calientes 470 ML</h2>
             <div class="menu-grid">
-                <div class="menu-item"><div class="item-header"><span class="item-name">Americano</span><span class="item-price">$35.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Latte</span><span class="item-price">$43.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Vainilla Latte</span><span class="item-price">$45.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Chocolate Mexicano</span><span class="item-price">$50.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Nutella Latte</span><span class="item-price">$60.00</span></div></div>
+                <div class="menu-item">
+                    <img src="https://drive.google.com/thumbnail?id=1nx9jagKqZFzi38n9ZpVpnl2eXDYyxooF&sz=w800" alt="Bebidas" class="item-image">
+                    <div class="item-header"><span class="item-name">Nutella Latte</span><span class="item-price">$60.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Chocolate Mexicano</span><span class="item-price">$50.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Vainilla Latte</span><span class="item-price">$45.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Latte Clásico</span><span class="item-price">$43.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Café Americano</span><span class="item-price">$35.00</span></div>
+                </div>
             </div>
         </section>
 
         <section class="menu-category">
-            <h2 class="category-title">Bebidas Frías</h2>
+            <h2 class="category-title">Bebidas Frías 470 ML</h2>
             <div class="menu-grid">
-                <div class="menu-item"><div class="item-header"><span class="item-name">Americano</span><span class="item-price">$40.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Latte</span><span class="item-price">$43.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Vainilla Latte</span><span class="item-price">$45.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Chocolate Mexicano</span><span class="item-price">$50.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Nutella Latte</span><span class="item-price">$60.00</span></div></div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Nutella Latte</span><span class="item-price">$60.00</span></div>
+                </div>
                 <div class="menu-item">
                     <div class="item-header"><span class="item-name">Malteada</span><span class="item-price">$60.00</span></div>
-                    <span class="item-desc">Fresa, chocolate o vainilla.</span>
+                    <span class="item-desc">Fresa, Chocolate o Vainilla</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Latte con Helado</span><span class="item-price">$56.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Limonada de Frutos Rojos</span><span class="item-price">$55.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Chocolate Mexicano</span><span class="item-price">$50.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Fresa Latte</span><span class="item-price">$50.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Vainilla Latte</span><span class="item-price">$45.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Latte Clásico</span><span class="item-price">$43.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Café Americano</span><span class="item-price">$40.00</span></div>
                 </div>
                 <div class="menu-item">
                     <div class="item-header"><span class="item-name">Smoothie Picosito</span><span class="item-price">$35.00</span></div>
-                    <span class="item-desc">Sandía o mango.</span>
+                    <span class="item-desc">Mango o Sandía</span>
                 </div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Limonada de Frutos Rojos</span><span class="item-price">$55.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Té Frío</span><span class="item-price">$20.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Fresa Latte</span><span class="item-price">$50.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Latte con Helado</span><span class="item-price">$56.00</span></div></div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Té Frío</span><span class="item-price">$20.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Leche de Almendras</span><span class="item-price">$7.00</span></div>
+                </div>
             </div>
         </section>
 
         <section class="menu-category">
             <h2 class="category-title">Embotellados</h2>
             <div class="menu-grid">
-                <div class="menu-item"><div class="item-header"><span class="item-name">Agua 1L</span><span class="item-price">$10.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Coca Cola 600ml</span><span class="item-price">$25.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Coca Cola 350ml</span><span class="item-price">$19.00</span></div></div>
-                <div class="menu-item"><div class="item-header"><span class="item-name">Naranjada Mineral 600ml</span><span class="item-price">$20.00</span></div></div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Coca Cola 600ml</span><span class="item-price">$25.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Naranjada Mineral 600ml</span><span class="item-price">$20.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Coca Cola 350 ml</span><span class="item-price">$19.00</span></div>
+                </div>
+                <div class="menu-item">
+                    <div class="item-header"><span class="item-name">Agua 1L</span><span class="item-price">$10.00</span></div>
+                </div>
             </div>
         </section>
+    </div>
 
-        <section class="apps-section">
-            <span class="apps-tag">Delivery Partners</span>
-            <span class="main-call">Encuéntranos como Bocatto Brunch en:</span>
-            <div class="apps-row">
-                <a href="https://www.rappi.com.mx/veracruz/restaurantes/delivery/600215-bocatto-brunch" target="_blank" class="app-text">Rappi</a>
-                <a href="https://www.ubereats.com/mx/store/bocatto-brunch/Zq3vVY-uR2O6vfc5YpGlbQ" target="_blank" class="app-text">Uber<span>Eats</span></a>
-                <a href="https://web.didiglobal.com/mx/food/veracruz-ver/bocatto-brunch/5764608285853093208/" target="_blank" class="app-text">Didi<span>Food</span></a>
-            </div>
-        </section>
+    <section class="apps-section">
+        <span class="apps-tag">Delivery Partners</span>
+        <span class="main-call">Encuéntranos como Bocatto Brunch en:</span>
+        <div class="apps-row">
+            <a href="https://www.rappi.com.mx/veracruz/restaurantes/delivery/600215-bocatto-brunch" target="_blank" class="app-text">Rappi</a>
+            <a href="https://www.ubereats.com/mx/store/bocatto-brunch/Zq3vVY-uR2O6vfc5YpGlbQ" target="_blank" class="app-text">Uber<span>Eats</span></a>
+            <a href="https://web.didiglobal.com/mx/food/veracruz-ver/bocatto-brunch/5764608285853093208/" target="_blank" class="app-text">Didi<span>Food</span></a>
+        </div>
+    </section>
 
-        <footer class="footer-main">
+    <footer class="footer-wrapper">
+        <div class="footer-main">
             <div class="brand-info">
                 <div class="footer-brand-name">Bocatto.</div>
                 <a href="mailto:contacto@bocattobrunch.com" style="text-decoration: none; color: var(--text-light); font-size: 0.85rem;">contacto@bocattobrunch.com</a>
             </div>
             <div class="footer-col">
                 <h4>Atención</h4>
-                <a href="https://wa.me/522295190082" target="_blank">WhatsApp</a>
+                <a href="https://wa.me/522295190082" target="_blank">WhatsApp: 229 519 0082</a>
                 <a href="menu.html">Menú</a>
                 <a href="promociones.html">Promociones</a>
             </div>
@@ -526,15 +561,15 @@
                 <a href="https://facebook.com/bocattobrunch" target="_blank">Facebook</a>
                 <a href="https://instagram.com/bocattobrunch" target="_blank">Instagram</a>
             </div>
-        </footer>
+        </div>
 
         <div class="legal-bar">
             <div>© 2024-2026 Bocatto Brunch</div>
             <div>Diseñado por <a href="https://www.harbor48.studio" target="_blank" style="text-decoration: none; color: inherit;">harbor48</a></div>
         </div>
+    </footer>
 
-    </div> <script>
-        // Función para quitar acentos y hacer todo minúsculas
+    <script>
         function normalizeText(text) {
             return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
         }
