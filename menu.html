@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
     <link rel="icon" type="image/png" href="favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -501,42 +500,40 @@
             </div>
         </section>
 
-    </div>
+        <section class="apps-section">
+            <span class="apps-tag">Delivery Partners</span>
+            <span class="main-call">Encuéntranos como Bocatto Brunch en:</span>
+            <div class="apps-row">
+                <a href="https://www.rappi.com.mx/veracruz/restaurantes/delivery/600215-bocatto-brunch" target="_blank" class="app-text">Rappi</a>
+                <a href="https://www.ubereats.com/mx/store/bocatto-brunch/Zq3vVY-uR2O6vfc5YpGlbQ" target="_blank" class="app-text">Uber<span>Eats</span></a>
+                <a href="https://web.didiglobal.com/mx/food/veracruz-ver/bocatto-brunch/5764608285853093208/" target="_blank" class="app-text">Didi<span>Food</span></a>
+            </div>
+        </section>
 
-    <section class="apps-section">
-        <span class="apps-tag">Delivery Partners</span>
-        <span class="main-call">Encuéntranos como Bocatto Brunch en:</span>
-        <div class="apps-row">
-            <a href="https://www.rappi.com.mx/veracruz/restaurantes/delivery/600215-bocatto-brunch" target="_blank" class="app-text">Rappi</a>
-            <a href="https://www.ubereats.com/mx/store/bocatto-brunch/Zq3vVY-uR2O6vfc5YpGlbQ" target="_blank" class="app-text">Uber<span>Eats</span></a>
-            <a href="https://web.didiglobal.com/mx/food/veracruz-ver/bocatto-brunch/5764608285853093208/" target="_blank" class="app-text">Didi<span>Food</span></a>
-        </div>
-    </section>
+        <footer class="footer-main">
+            <div class="brand-info">
+                <div class="footer-brand-name">Bocatto.</div>
+                <a href="mailto:contacto@bocattobrunch.com" style="text-decoration: none; color: var(--text-light); font-size: 0.85rem;">contacto@bocattobrunch.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Atención</h4>
+                <a href="https://wa.me/522295190082" target="_blank">WhatsApp</a>
+                <a href="menu.html">Menú</a>
+                <a href="promociones.html">Promociones</a>
+            </div>
+            <div class="footer-col">
+                <h4>Nuestra Marca</h4>
+                <a href="https://facebook.com/bocattobrunch" target="_blank">Facebook</a>
+                <a href="https://instagram.com/bocattobrunch" target="_blank">Instagram</a>
+            </div>
+        </footer>
 
-    <footer class="footer-main">
-        <div class="brand-info">
-            <div class="footer-brand-name">Bocatto.</div>
-            <a href="mailto:contacto@bocattobrunch.com" style="text-decoration: none; color: var(--text-light); font-size: 0.85rem;">contacto@bocattobrunch.com</a>
+        <div class="legal-bar">
+            <div>© 2024-2026 Bocatto Brunch</div>
+            <div>Diseñado por <a href="https://www.harbor48.studio" target="_blank" style="text-decoration: none; color: inherit;">harbor48</a></div>
         </div>
-        <div class="footer-col">
-            <h4>Atención</h4>
-            <a href="https://wa.me/522295190082" target="_blank">WhatsApp</a>
-            <a href="menu.html">Menú</a>
-            <a href="promociones.html">Promociones</a>
-        </div>
-        <div class="footer-col">
-            <h4>Nuestra Marca</h4>
-            <a href="https://facebook.com/bocattobrunch" target="_blank">Facebook</a>
-            <a href="https://instagram.com/bocattobrunch" target="_blank">Instagram</a>
-        </div>
-    </footer>
 
-    <div class="legal-bar">
-        <div>© 2024-2026 Bocatto Brunch</div>
-        <div>Diseñado por <a href="https://www.harbor48.studio" target="_blank" style="text-decoration: none; color: inherit;">harbor48</a></div>
-    </div>
-
-    <script>
+    </div> <script>
         // Función para quitar acentos y hacer todo minúsculas
         function normalizeText(text) {
             return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -554,7 +551,6 @@
                 items.forEach(item => {
                     const text = normalizeText(item.innerText);
                     
-                    // Comprobación de que el texto contiene el término
                     if (text.includes(term)) {
                         item.style.display = 'flex';
                         categoryMatches++;
