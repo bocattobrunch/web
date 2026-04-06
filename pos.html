@@ -75,7 +75,7 @@
         }
 
         /* Buscador nativo y campos */
-        input { 
+        input, select { 
             width: 100%; 
             padding: 15px; 
             border: 1px solid rgba(0,0,0,0.1); 
@@ -88,7 +88,7 @@
             transition: all 0.3s ease;
         }
 
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: var(--accent);
             background-color: var(--white);
@@ -342,6 +342,23 @@
         <input type="text" id="dir_ref" placeholder="Referencias (Ej. Portón blanco...)" oninput="actualizarTicket()">
     </div>
 
+    <div class="row row-half" style="margin-top: 15px;">
+        <div class="form-group">
+            <label>Método de Pago</label>
+            <select id="metodo_pago" onchange="verificarPago(); actualizarTicket()">
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+            </select>
+        </div>
+        <div class="form-group" id="grupo_estado_pago" style="display: none;">
+            <label>Estado de Pago</label>
+            <select id="estado_pago" onchange="actualizarTicket()">
+                <option value="No Pagado">No Pagado</option>
+                <option value="Pagado">Pagado</option>
+            </select>
+        </div>
+    </div>
+
     <div class="ticket-wrapper">
         <div id="ticket-visual">
             <div class="ticket-header">
@@ -367,6 +384,8 @@
             
             <p id="t-direccion" style="font-size: 11px; margin-top: 15px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-light); line-height: 1.4;"></p>
             
+            <p id="t-pago" style="font-size: 12px; margin-top: 10px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--dark); line-height: 1.4; font-weight: 800;"></p>
+
             <div class="ticket-divider"></div>
             
             <div class="ticket-footer">
@@ -392,6 +411,16 @@
 
     document.getElementById('t-fecha').innerText = obtenerFechaActual();
 
+    function verificarPago() {
+        const metodo = document.getElementById('metodo_pago').value;
+        const grupoEstado = document.getElementById('grupo_estado_pago');
+        if (metodo === 'Transferencia') {
+            grupoEstado.style.display = 'block';
+        } else {
+            grupoEstado.style.display = 'none';
+        }
+    }
+
     function agregarAlPedido() {
         const inputStr = document.getElementById('producto').value;
         
@@ -415,13 +444,11 @@
         actualizarTicket();
     }
 
-    // NUEVA FUNCIÓN PARA ELIMINAR UN PRODUCTO ESPECÍFICO
     function eliminarDelPedido(index) {
         pedido.splice(index, 1);
         actualizarTicket();
     }
 
-    // NUEVA FUNCIÓN PARA BORRAR TODO EL TICKET
     function limpiarTicket() {
         if(confirm("¿Estás seguro de borrar todo y empezar un ticket nuevo?")) {
             pedido = [];
@@ -440,6 +467,11 @@
             document.getElementById('dir_cp').value = '';
             document.getElementById('dir_ref').value = '';
 
+            // Reiniciar Método de Pago
+            document.getElementById('metodo_pago').value = 'Efectivo';
+            document.getElementById('estado_pago').value = 'No Pagado';
+            verificarPago();
+
             actualizarTicket();
         }
     }
@@ -451,7 +483,7 @@
         const nombre = document.getElementById('nombre_cliente').value.trim();
         const telefono = document.getElementById('telefono_cliente').value.trim();
         
-        // RECOLECTAR Y UNIR DIRECCIÓN EN UNA SOLA LÍNEA
+        // RECOLECTAR DIRECCIÓN
         const calle = document.getElementById('dir_calle').value.trim();
         const ext = document.getElementById('dir_ext').value.trim();
         const int = document.getElementById('dir_int').value.trim();
@@ -490,7 +522,6 @@
             
             let htmlNota = item.nota ? `<div class="item-nota">» ${item.nota}</div>` : "";
             
-            // SE AGREGA LA 'X' (btn-eliminar)
             lista.innerHTML += `
                 <div class="item-container">
                     <div class="item-row">
@@ -511,12 +542,24 @@
         } else {
             direccionText.innerHTML = "";
         }
+
+        // ACTUALIZAR MÉTODO DE PAGO EN EL TICKET
+        const metodo = document.getElementById('metodo_pago').value;
+        const estado = document.getElementById('estado_pago').value;
+        let pagoText = `MÉTODO DE PAGO: ${metodo}`;
+        
+        if(metodo === 'Transferencia') {
+            // Se le pone color rojo si no está pagado, verde si está pagado para ayudar a identificar visualmente.
+            let colorEstado = estado === 'Pagado' ? '#28a745' : '#d9534f'; 
+            pagoText += ` - <span style="color:${colorEstado};">${estado}</span>`;
+        }
+        
+        document.getElementById('t-pago').innerHTML = pagoText;
     }
 
     function descargarTicket() {
         document.getElementById('t-fecha').innerText = obtenerFechaActual();
         
-        // OCULTAR LOS BOTONES DE ELIMINAR ANTES DE TOMAR LA FOTO
         const botonesEliminar = document.querySelectorAll('.btn-eliminar');
         botonesEliminar.forEach(btn => btn.style.display = 'none');
 
@@ -530,11 +573,12 @@
             link.href = canvas.toDataURL('image/png');
             link.click();
 
-            // VOLVER A MOSTRAR LOS BOTONES DESPUÉS DE LA DESCARGA
             botonesEliminar.forEach(btn => btn.style.display = 'inline');
         });
     }
 
+    // Inicializar ticket y vista
+    verificarPago();
     actualizarTicket();
 </script>
 
