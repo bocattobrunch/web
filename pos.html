@@ -16,6 +16,7 @@
             --dark: #3b2f2f;
             --text-light: #7a6c5d;
             --white: #ffffff;
+            --danger: #d9534f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -136,6 +137,19 @@
             color: var(--dark);
         }
 
+        .btn-danger-outline {
+            background: transparent;
+            color: var(--danger);
+            border: 1px solid rgba(217, 83, 79, 0.3);
+            margin-top: 10px;
+        }
+
+        .btn-danger-outline:hover {
+            background: rgba(217, 83, 79, 0.05);
+            border-color: var(--danger);
+            transform: translateY(-2px);
+        }
+
         hr {
             border: none;
             border-top: 1px solid rgba(0,0,0,0.05);
@@ -172,6 +186,15 @@
         .item-container { margin: 8px 0; display: flex; flex-direction: column; }
         .item-row { display: flex; justify-content: space-between; font-size: 13px; line-height: 1.4; font-weight: bold; }
         .item-nota { font-size: 10px; color: var(--text-light); font-family: 'Plus Jakarta Sans', sans-serif; margin-top: 2px; line-height: 1.2; font-weight: 500;}
+
+        .btn-eliminar {
+            color: #d9534f;
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+        }
 
         .total-row { margin-top: 5px; font-weight: bold; font-size: 13px;}
         
@@ -293,9 +316,30 @@
         </div>
     </div>
     
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 5px;">
         <label>Dirección de Envío</label>
-        <input type="text" id="direccion" placeholder="Ej. Calle Reforma #123" oninput="actualizarTicket()">
+    </div>
+    <div class="row row-half">
+        <div class="form-group">
+            <input type="text" id="dir_calle" placeholder="Calle (Ej. Reforma)" oninput="actualizarTicket()">
+        </div>
+        <div class="form-group">
+            <input type="text" id="dir_ext" placeholder="Núm Ext." oninput="actualizarTicket()">
+        </div>
+        <div class="form-group">
+            <input type="text" id="dir_int" placeholder="Núm Int." oninput="actualizarTicket()">
+        </div>
+    </div>
+    <div class="row row-half">
+        <div class="form-group">
+            <input type="text" id="dir_col" placeholder="Colonia / Fracc." oninput="actualizarTicket()">
+        </div>
+        <div class="form-group">
+            <input type="text" id="dir_cp" placeholder="C.P." oninput="actualizarTicket()">
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text" id="dir_ref" placeholder="Referencias (Ej. Portón blanco...)" oninput="actualizarTicket()">
     </div>
 
     <div class="ticket-wrapper">
@@ -334,6 +378,8 @@
     </div>
 
     <button class="btn-main" onclick="descargarTicket()" style="margin-top: 20px;">Generar Ticket Final</button>
+    
+    <button class="btn-main btn-danger-outline" onclick="limpiarTicket()">Limpiar Ticket / Nuevo Pedido</button>
 </div>
 
 <script>
@@ -349,7 +395,6 @@
     function agregarAlPedido() {
         const inputStr = document.getElementById('producto').value;
         
-        // Verifica si el texto tiene el formato correcto "Producto - $Precio"
         if(!inputStr.includes(" - $")) {
             alert("Por favor, selecciona un producto válido de la lista desplegable.");
             return;
@@ -363,12 +408,40 @@
 
         pedido.push({ nombre, precio, cant, nota });
         
-        // Limpiar campos después de agregar
         document.getElementById('producto').value = '';
         document.getElementById('cantidad').value = 1;
         document.getElementById('nota_platillo').value = '';
 
         actualizarTicket();
+    }
+
+    // NUEVA FUNCIÓN PARA ELIMINAR UN PRODUCTO ESPECÍFICO
+    function eliminarDelPedido(index) {
+        pedido.splice(index, 1);
+        actualizarTicket();
+    }
+
+    // NUEVA FUNCIÓN PARA BORRAR TODO EL TICKET
+    function limpiarTicket() {
+        if(confirm("¿Estás seguro de borrar todo y empezar un ticket nuevo?")) {
+            pedido = [];
+            document.getElementById('producto').value = '';
+            document.getElementById('cantidad').value = 1;
+            document.getElementById('nota_platillo').value = '';
+            document.getElementById('nombre_cliente').value = '';
+            document.getElementById('telefono_cliente').value = '';
+            document.getElementById('envio').value = 0;
+            
+            // Limpiar campos de dirección
+            document.getElementById('dir_calle').value = '';
+            document.getElementById('dir_ext').value = '';
+            document.getElementById('dir_int').value = '';
+            document.getElementById('dir_col').value = '';
+            document.getElementById('dir_cp').value = '';
+            document.getElementById('dir_ref').value = '';
+
+            actualizarTicket();
+        }
     }
 
     function actualizarTicket() {
@@ -377,7 +450,22 @@
         
         const nombre = document.getElementById('nombre_cliente').value.trim();
         const telefono = document.getElementById('telefono_cliente').value.trim();
-        const direccion = document.getElementById('direccion').value.trim();
+        
+        // RECOLECTAR Y UNIR DIRECCIÓN EN UNA SOLA LÍNEA
+        const calle = document.getElementById('dir_calle').value.trim();
+        const ext = document.getElementById('dir_ext').value.trim();
+        const int = document.getElementById('dir_int').value.trim();
+        const col = document.getElementById('dir_col').value.trim();
+        const cp = document.getElementById('dir_cp').value.trim();
+        const ref = document.getElementById('dir_ref').value.trim();
+
+        let direccionLinea = "";
+        if(calle) direccionLinea += calle;
+        if(ext) direccionLinea += " #" + ext;
+        if(int) direccionLinea += " Int. " + int;
+        if(col) direccionLinea += ", Col. " + col;
+        if(cp) direccionLinea += ", C.P. " + cp;
+        if(ref) direccionLinea += " (Ref: " + ref + ")";
         
         document.getElementById('t-fecha').innerText = obtenerFechaActual();
         
@@ -396,18 +484,18 @@
             lista.innerHTML = "<p style='text-align:center; font-size:12px; color: var(--text-light); font-family: \"Plus Jakarta Sans\", sans-serif;'>El carrito está vacío</p>";
         }
 
-        pedido.forEach(item => {
+        pedido.forEach((item, index) => {
             const totalItem = item.precio * item.cant;
             subtotal += totalItem;
             
-            // Renderiza la nota solo si existe
             let htmlNota = item.nota ? `<div class="item-nota">» ${item.nota}</div>` : "";
             
+            // SE AGREGA LA 'X' (btn-eliminar)
             lista.innerHTML += `
                 <div class="item-container">
                     <div class="item-row">
                         <span style="flex: 1; padding-right: 10px;">${item.cant}x ${item.nombre}</span>
-                        <span>$${totalItem.toFixed(2)}</span>
+                        <span>$${totalItem.toFixed(2)} <span class="btn-eliminar" onclick="eliminarDelPedido(${index})" title="Eliminar producto">X</span></span>
                     </div>
                     ${htmlNota}
                 </div>`;
@@ -418,8 +506,8 @@
         document.getElementById('t-total').innerText = `$${(subtotal + envio).toFixed(2)}`;
         
         const direccionText = document.getElementById('t-direccion');
-        if (direccion !== "") {
-            direccionText.innerHTML = "<strong>DIRECCIÓN DE ENTREGA:</strong><br>" + direccion;
+        if (direccionLinea !== "") {
+            direccionText.innerHTML = "<strong>DIRECCIÓN DE ENTREGA:</strong><br>" + direccionLinea;
         } else {
             direccionText.innerHTML = "";
         }
@@ -428,6 +516,10 @@
     function descargarTicket() {
         document.getElementById('t-fecha').innerText = obtenerFechaActual();
         
+        // OCULTAR LOS BOTONES DE ELIMINAR ANTES DE TOMAR LA FOTO
+        const botonesEliminar = document.querySelectorAll('.btn-eliminar');
+        botonesEliminar.forEach(btn => btn.style.display = 'none');
+
         const ticket = document.getElementById('ticket-visual');
         html2canvas(ticket, { 
             scale: 2,
@@ -437,6 +529,9 @@
             link.download = 'Ticket_Bocatto.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
+
+            // VOLVER A MOSTRAR LOS BOTONES DESPUÉS DE LA DESCARGA
+            botonesEliminar.forEach(btn => btn.style.display = 'inline');
         });
     }
 
