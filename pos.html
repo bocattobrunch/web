@@ -180,6 +180,7 @@
         .ticket-header { text-align: center; margin-bottom: 15px; }
         .ticket-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -1px; margin: 0; color: var(--dark); }
         .ticket-fecha { font-size: 12px; margin-top: 8px; color: var(--text-light); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; }
+        .ticket-origen { font-size: 13px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; margin-bottom: 10px; text-transform: uppercase; color: var(--accent); }
         .ticket-cliente { font-size: 12px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--dark); margin-bottom: 12px; line-height: 1.4; }
         .ticket-divider { border-top: 1px dashed rgba(0,0,0,0.2); margin: 12px 0; }
         
@@ -358,14 +359,29 @@
             </select>
         </div>
     </div>
+    
+    <div class="form-group">
+        <label>Plataforma / Origen del Pedido</label>
+        <select id="origen_pedido" onchange="actualizarTicket()">
+            <option value="Local / WhatsApp">Local / WhatsApp (Directo)</option>
+            <option value="Rappi">Rappi</option>
+            <option value="Uber Eats">Uber Eats</option>
+            <option value="Didi Food">Didi Food</option>
+        </select>
+    </div>
 
     <div class="ticket-wrapper">
         <div id="ticket-visual">
             <div class="ticket-header">
                 <p class="ticket-title">Bocatto.</p>
-                <div class="ticket-fecha" id="t-fecha"></div>
+                <div class="ticket-fecha">
+                    <strong>Folio: #<span id="t-folio"></span></strong><br>
+                    <span id="t-fecha"></span>
+                </div>
             </div>
             
+            <div id="t-origen" class="ticket-origen"></div>
+
             <div id="t-cliente-info" class="ticket-cliente"></div>
             
             <div class="ticket-divider"></div>
@@ -403,13 +419,30 @@
 
 <script>
     let pedido = [];
+    
+    // SISTEMA DE FOLIO CON MEMORIA LOCAL
+    let folioActual = parseInt(localStorage.getItem('bocatto_folio')) || 1;
+
+    function formatoFolio(num) {
+        return num.toString().padStart(4, '0');
+    }
 
     function obtenerFechaActual() {
         const opciones = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
         return new Date().toLocaleDateString('es-MX', opciones);
     }
 
-    document.getElementById('t-fecha').innerText = obtenerFechaActual();
+    // Fecha para nombre de archivo (Formato: DD-MM-YYYY_HH-MM)
+    function obtenerFechaArchivo() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `${day}-${month}-${year}_${hours}-${minutes}-${seconds}`;
+    }
 
     function verificarPago() {
         const metodo = document.getElementById('metodo_pago').value;
@@ -450,7 +483,12 @@
     }
 
     function limpiarTicket() {
-        if(confirm("¿Estás seguro de borrar todo y empezar un ticket nuevo?")) {
+        if(confirm("¿Estás seguro de borrar todo y empezar un ticket nuevo? (Esto avanzará el número de Folio al siguiente)")) {
+            // Avanzar Folio
+            folioActual++;
+            localStorage.setItem('bocatto_folio', folioActual);
+
+            // Limpiar datos
             pedido = [];
             document.getElementById('producto').value = '';
             document.getElementById('cantidad').value = 1;
@@ -459,7 +497,6 @@
             document.getElementById('telefono_cliente').value = '';
             document.getElementById('envio').value = 0;
             
-            // Limpiar campos de dirección
             document.getElementById('dir_calle').value = '';
             document.getElementById('dir_ext').value = '';
             document.getElementById('dir_int').value = '';
@@ -467,11 +504,11 @@
             document.getElementById('dir_cp').value = '';
             document.getElementById('dir_ref').value = '';
 
-            // Reiniciar Método de Pago
             document.getElementById('metodo_pago').value = 'Efectivo';
             document.getElementById('estado_pago').value = 'No Pagado';
+            document.getElementById('origen_pedido').value = 'Local / WhatsApp';
+            
             verificarPago();
-
             actualizarTicket();
         }
     }
@@ -483,7 +520,6 @@
         const nombre = document.getElementById('nombre_cliente').value.trim();
         const telefono = document.getElementById('telefono_cliente').value.trim();
         
-        // RECOLECTAR DIRECCIÓN
         const calle = document.getElementById('dir_calle').value.trim();
         const ext = document.getElementById('dir_ext').value.trim();
         const int = document.getElementById('dir_int').value.trim();
@@ -499,8 +535,22 @@
         if(cp) direccionLinea += ", C.P. " + cp;
         if(ref) direccionLinea += " (Ref: " + ref + ")";
         
+        // Actualizar Folio y Fecha
+        document.getElementById('t-folio').innerText = formatoFolio(folioActual);
         document.getElementById('t-fecha').innerText = obtenerFechaActual();
         
+        // Actualizar Origen (Delivery)
+        const origen = document.getElementById('origen_pedido').value;
+        const origenText = document.getElementById('t-origen');
+        if(origen !== 'Local / WhatsApp') {
+            origenText.innerHTML = `🛵 VÍA: ${origen}`;
+            origenText.style.display = "block";
+            origenText.style.textAlign = "center";
+        } else {
+            origenText.innerHTML = "";
+            origenText.style.display = "none";
+        }
+
         const clienteInfo = document.getElementById('t-cliente-info');
         let infoHTML = "";
         if (nombre) infoHTML += `<strong>Cliente:</strong> ${nombre}<br>`;
@@ -543,13 +593,11 @@
             direccionText.innerHTML = "";
         }
 
-        // ACTUALIZAR MÉTODO DE PAGO EN EL TICKET
         const metodo = document.getElementById('metodo_pago').value;
         const estado = document.getElementById('estado_pago').value;
         let pagoText = `MÉTODO DE PAGO: ${metodo}`;
         
         if(metodo === 'Transferencia') {
-            // Se le pone color rojo si no está pagado, verde si está pagado para ayudar a identificar visualmente.
             let colorEstado = estado === 'Pagado' ? '#28a745' : '#d9534f'; 
             pagoText += ` - <span style="color:${colorEstado};">${estado}</span>`;
         }
@@ -558,6 +606,9 @@
     }
 
     function descargarTicket() {
+        // Asegurarnos de que el folio actual se guarda (por si es la primera vez que se usa la app en este navegador)
+        localStorage.setItem('bocatto_folio', folioActual);
+        
         document.getElementById('t-fecha').innerText = obtenerFechaActual();
         
         const botonesEliminar = document.querySelectorAll('.btn-eliminar');
@@ -569,7 +620,11 @@
             backgroundColor: "#ffffff"
         }).then(canvas => {
             const link = document.createElement('a');
-            link.download = 'Ticket_Bocatto.png';
+            
+            // NOMBRE DEL ARCHIVO CON FOLIO, FECHA Y HORA
+            const nombreArchivo = `Folio_${formatoFolio(folioActual)}_${obtenerFechaArchivo()}.png`;
+            link.download = nombreArchivo;
+            
             link.href = canvas.toDataURL('image/png');
             link.click();
 
@@ -577,7 +632,6 @@
         });
     }
 
-    // Inicializar ticket y vista
     verificarPago();
     actualizarTicket();
 </script>
