@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Latte Club | By Bocatto</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap');
+
+        :root {
+            --club-paper: #F2EBE3; /* Beige cálido */
+            --club-ink: #111111; /* Negro casi puro */
+            --club-punch: #FF4500; /* Naranja/Rojo eléctrico */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background-color: var(--club-paper); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            color: var(--club-ink); 
+            line-height: 1.5; 
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- CINTA ANIMADA (MARQUEE) --- */
+        .marquee {
+            background-color: var(--club-punch);
+            color: var(--club-paper);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-bottom: 3px solid var(--club-ink);
+            position: relative;
+            display: flex;
+        }
+
+        .marquee-content {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+
+        .marquee-content span { margin: 0 40px; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- NAVEGACIÓN DEL CLUB --- */
+        .club-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 3px solid var(--club-ink);
+            background: var(--club-paper);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .club-nav-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-decoration: none;
+            color: var(--club-ink);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .club-nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-retro {
+            text-decoration: none;
+            color: var(--club-ink);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border: 3px solid var(--club-ink);
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+
+        .btn-retro:hover {
+            background: var(--club-ink);
+            color: var(--club-paper);
+            box-shadow: 4px 4px 0px var(--club-punch);
+            transform: translate(-2px, -2px);
+        }
+
+        @media (max-width: 600px) {
+            .club-nav { padding: 20px; flex-direction: column; gap: 20px; text-align: center; }
+        }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--club-ink);
+            background: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="%23111111" opacity="0.1"/></svg>');
+        }
+
+        .hero-img {
+            max-width: 250px;
+            margin-bottom: 30px;
+            /* Se eliminó el filtro de sombra naranja para un look más limpio */
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.9;
+            letter-spacing: -3px;
+            color: var(--club-ink);
+            margin-bottom: 20px;
+        }
+
+        /* --- BENTO GRID MENU --- */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .category-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: var(--club-ink);
+            color: var(--club-paper);
+            padding: 10px 25px;
+            transform: rotate(-2deg);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            border-top: 3px solid var(--club-ink);
+            border-left: 3px solid var(--club-ink);
+            margin-bottom: 100px;
+            background: var(--club-ink);
+            gap: 3px; /* Esto crea el efecto de bordes perfectos */
+        }
+
+        .bento-item {
+            background: var(--club-paper);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto hover salvaje */
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--club-punch);
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 0;
+        }
+
+        .bento-item:hover::before { transform: translateY(0); }
+        .bento-item:hover .item-name, 
+        .bento-item:hover .item-desc, 
+        .bento-item:hover .item-price {
+            color: var(--club-paper);
+            position: relative;
+            z-index: 1;
+        }
+
+        .item-info { position: relative; z-index: 1; }
+
+        .item-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            color: var(--club-ink);
+            transition: color 0.3s;
+        }
+
+        .item-desc {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--club-ink);
+            opacity: 0.7;
+            margin-bottom: 30px;
+            transition: color 0.3s;
+        }
+
+        .item-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--club-punch);
+            align-self: flex-end;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s;
+        }
+
+        /* --- FOOTER DEL CLUB --- */
+        .club-footer {
+            background: var(--club-ink);
+            color: var(--club-paper);
+            padding: 100px 20px 40px;
+            text-align: center;
+        }
+
+        .footer-massive {
+            font-size: clamp(3rem, 12vw, 10rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.8;
+            letter-spacing: -4px;
+            margin-bottom: 20px;
+            color: var(--club-paper);
+        }
+
+        .footer-by {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--club-punch);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .footer-links a {
+            color: var(--club-paper);
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .footer-links a:hover { border-color: var(--club-punch); }
+
+        /* Botón especial para Instagram */
+        .footer-links .ig-link {
+            background: var(--club-paper);
+            color: var(--club-ink);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            border: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .footer-links .ig-link:hover {
+            background: var(--club-punch);
+            color: var(--club-paper);
+            transform: scale(1.05);
+        }
+
+        .club-legal {
+            border-top: 2px solid rgba(242, 235, 227, 0.1);
+            padding-top: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+
+        /* BOTÓN WHATSAPP FIJO */
+        .btn-floating {
+            position: fixed; 
+            bottom: 30px; right: 30px;
+            background: var(--club-punch); 
+            color: var(--club-paper);
+            padding: 20px 35px; 
+            text-align: center; 
+            text-decoration: none;
+            font-weight: 900; 
+            text-transform: uppercase; 
+            font-size: 0.85rem;
+            letter-spacing: 2px; 
+            border: 3px solid var(--club-ink);
+            box-shadow: 6px 6px 0px var(--club-ink);
+            z-index: 1000; 
+            transition: 0.2s ease;
+        }
+        .btn-floating:hover { 
+            transform: translate(2px, 2px); 
+            box-shadow: 2px 2px 0px var(--club-ink);
+        }
+
+        @media (max-width: 768px) {
+            .btn-floating { 
+                left: 50%; right: auto; transform: translateX(-50%); 
+                width: 90%; max-width: 350px; 
+            }
+            .btn-floating:hover { transform: translate(-50%, 2px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>THE LATTE CLUB</span> <span>BY BOCATTO BRUNCH</span> <span>BEBIDAS FRÍAS</span> <span>SMOOTHIES PICOSITOS</span> <span>BAGELS</span>
+            <span>THE LATTE CLUB</span> <span>BY BOCATTO BRUNCH</span> <span>BEBIDAS FRÍAS</span> <span>SMOOTHIES PICOSITOS</span> <span>BAGELS</span>
+        </div>
+        <div class="marquee-content">
+            <span>THE LATTE CLUB</span> <span>BY BOCATTO BRUNCH</span> <span>BEBIDAS FRÍAS</span> <span>SMOOTHIES PICOSITOS</span> <span>BAGELS</span>
+            <span>THE LATTE CLUB</span> <span>BY BOCATTO BRUNCH</span> <span>BEBIDAS FRÍAS</span> <span>SMOOTHIES PICOSITOS</span> <span>BAGELS</span>
+        </div>
+    </div>
+
+    <nav class="club-nav">
+        <a href="thelatte.html" class="club-nav-logo">TLC.</a>
+        <div class="club-nav-links">
+            <a href="index.html" class="btn-retro">← Volver a Bocatto</a>
+        </div>
+    </nav>
+
+    <a href="https://wa.me/522295190082" target="_blank" class="btn-floating">Ordenar Ahora</a>
+
+    <header class="hero">
+        <img src="https://drive.google.com/thumbnail?id=1AEWE6dU0NxzNDSTn9ggE44uaIq6jr1jV&sz=w1000" alt="The Latte Club Logo" class="hero-img">
+        <h1 class="hero-title">Join The Club.</h1>
+    </header>
+
+    <main class="menu-container">
+        
+        <h2 class="category-title">The Lattes</h2>
+        <div class="bento-grid">
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Strawberry</div>
+                    <div class="item-desc">Late frío con puré de fresa natural.</div>
+                </div>
+                <div class="item-price">$55</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Vainilla</div>
+                    <div class="item-desc">Late frío sabor vainilla artesanal.</div>
+                </div>
+                <div class="item-price">$45</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Nutella</div>
+                    <div class="item-desc">Late frío con cremosa Nutella.</div>
+                </div>
+                <div class="item-price">$60</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Original</div>
+                    <div class="item-desc">Late frío clásico, ligeramente dulce.</div>
+                </div>
+                <div class="item-price">$40</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Con Helado</div>
+                    <div class="item-desc">Late frío con bola de helado de vainilla.</div>
+                </div>
+                <div class="item-price">$55</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Horchata</div>
+                    <div class="item-desc">Late frío con toque de horchata.</div>
+                </div>
+                <div class="item-price">$50</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Canela</div>
+                    <div class="item-desc">Late frío espolvoreado con canela.</div>
+                </div>
+                <div class="item-price">$45</div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Smoothies</h2>
+        <div class="bento-grid">
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Mango Picosito</div>
+                    <div class="item-desc">Mango con chamoy Miguelito y tajín.</div>
+                </div>
+                <div class="item-price">$35</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Sandía Picosita</div>
+                    <div class="item-desc">Sandía con chamoy Miguelito y tajín.</div>
+                </div>
+                <div class="item-price">$35</div>
+            </div>
+        </div>
+
+        <h2 class="category-title">Bagels</h2>
+        <div class="bento-grid" style="margin-bottom: 0;">
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Jamón & Philly</div>
+                    <div class="item-desc">Jamón y queso crema sobre bagel tostado.</div>
+                </div>
+                <div class="item-price">$55</div>
+            </div>
+            <div class="bento-item">
+                <div class="item-info">
+                    <div class="item-name">Philly & Mermelada</div>
+                    <div class="item-desc">Queso crema y mermelada de fresa.</div>
+                </div>
+                <div class="item-price">$55</div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="club-footer">
+        <div class="footer-massive">THE LATTE<br>CLUB</div>
+        <div class="footer-by">By Bocatto Brunch</div>
+        
+        <div class="footer-links">
+            <a href="https://instagram.com/thelatteclubveracruz" target="_blank" class="ig-link">Instagram: @thelatteclubveracruz</a>
+            <a href="https://wa.me/522295190082" target="_blank">Contactar por WhatsApp</a>
+        </div>
+
+        <div class="club-legal">
+            © 2024-2026 Bocatto Brunch. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>
