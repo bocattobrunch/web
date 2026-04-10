@@ -131,27 +131,37 @@
                 <p style="color: #7a6c5d; margin-top: 10px; font-size: 0.9rem;">Registra tus datos y recibe un regalo en tu 5ta orden directa.</p>
             </div>
             
-            <form action="https://docs.google.com/forms/d/e/1FAIpQLSezMl5nEQ4qGhfy-KkrWeV1WxFP3tBUugyRJvoGh_-NrJB_6Q/formResponse" method="POST" target="_self">
-                
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; color: #3b2f2f; margin-bottom: 8px;">Nombre Completo</label>
-                    <input type="text" name="entry.145661258" required style="width: 100%; padding: 15px; border: 1px solid #eee; background: #f9f8f6; border-radius: 4px; font-family: inherit;">
-                </div>
+            <script type="text/javascript">var submitted=false;</script>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { document.getElementById('formulario-contenido').style.display='none'; document.getElementById('mensaje-exito').style.display='block'; }"></iframe>
 
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; color: #3b2f2f; margin-bottom: 8px;">WhatsApp (10 dígitos)</label>
-                    <input type="tel" name="entry.2057392849" placeholder="229..." required style="width: 100%; padding: 15px; border: 1px solid #eee; background: #f9f8f6; border-radius: 4px; font-family: inherit;">
-                </div>
+            <div id="formulario-contenido">
+                <form action="https://docs.google.com/forms/d/e/1FAIpQLSezMl5nEQ4qGhfy-KkrWeV1WxFP3tBUugyRJvoGh_-NrJB_6Q/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; color: #3b2f2f; margin-bottom: 8px;">Nombre Completo</label>
+                        <input type="text" name="entry.145661258" required style="width: 100%; padding: 15px; border: 1px solid #eee; background: #f9f8f6; border-radius: 4px; font-family: inherit;">
+                    </div>
 
-                <div style="margin-bottom: 30px;">
-                    <label style="display: block; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; color: #3b2f2f; margin-bottom: 8px;">Fecha de Cumpleaños</label>
-                    <input type="date" name="entry.702727153" required style="width: 100%; padding: 15px; border: 1px solid #eee; background: #f9f8f6; border-radius: 4px; font-family: inherit; color: #7a6c5d;">
-                </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; color: #3b2f2f; margin-bottom: 8px;">WhatsApp (10 dígitos)</label>
+                        <input type="tel" name="entry.2057392849" placeholder="229..." required style="width: 100%; padding: 15px; border: 1px solid #eee; background: #f9f8f6; border-radius: 4px; font-family: inherit;">
+                    </div>
 
-                <button type="submit" style="width: 100%; background: #1b2a8d; color: white; padding: 20px; font-weight: 800; border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;">
-                    UNIRME AL CLUB
-                </button>
-            </form>
+                    <div style="margin-bottom: 30px;">
+                        <label style="display: block; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; color: #3b2f2f; margin-bottom: 8px;">Fecha de Cumpleaños</label>
+                        <input type="date" name="entry.702727153" required style="width: 100%; padding: 15px; border: 1px solid #eee; background: #f9f8f6; border-radius: 4px; font-family: inherit; color: #7a6c5d;">
+                    </div>
+
+                    <button type="submit" style="width: 100%; background: #1b2a8d; color: white; padding: 20px; font-weight: 800; border: none; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;">
+                        UNIRME AL CLUB
+                    </button>
+                </form>
+            </div>
+
+            <div id="mensaje-exito" style="display: none; text-align: center; padding: 20px 0;">
+                <h3 style="color: #1b2a8d; font-size: 1.5rem; margin-bottom: 10px;">¡Gracias por registrarte!</h3>
+                <p style="color: #7a6c5d; font-size: 0.9rem;">Tus datos se han guardado exitosamente. Pronto recibirás noticias nuestras.</p>
+            </div>
         </section>
 
         <footer>
